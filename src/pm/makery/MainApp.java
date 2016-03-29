@@ -9,8 +9,12 @@ import javafx.scene.layout.AnchorPane;
 import javafx.scene.layout.BorderPane;
 import javafx.stage.Modality;
 import javafx.stage.Stage;
+<<<<<<< HEAD
 import pm.makery.view.LoginPageController;
 import pm.makery.view.StartPageController;
+=======
+import pm.makery.view.RegistrationPageController;
+>>>>>>> 057ac7261b74b05f35bea746f8deed2472f01432
 
 public class MainApp extends Application {
 
@@ -29,7 +33,14 @@ public class MainApp extends Application {
 		initPlaneLayout();
 
 		showLoginPage();
+
+        this.primaryStage.setResizable(false);
+
 	}
+
+
+
+
 
 	/**
 	 * Initializes the root layout.
@@ -66,6 +77,19 @@ public class MainApp extends Application {
 
 	public Stage getPrimaryStage() {
 		return primaryStage;
+            // Load root layout from fxml file.
+            FXMLLoader loader = new FXMLLoader();
+            loader.setLocation(MainApp.class.getResource("view/RootLayout.fxml"));
+            rootLayout = (BorderPane) loader.load();
+
+
+            // Show the scene containing the root layout.
+            Scene scene = new Scene(rootLayout);
+            primaryStage.setScene(scene);
+            primaryStage.show();
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
 	}
 
 	/**
@@ -117,6 +141,29 @@ public class MainApp extends Application {
 			e.printStackTrace();
 			return false;
 		}
+	}
+
+	/**
+	 * Shows the login page inside rootlayout.
+	 */
+	public void showRegistrationPage() {
+		 try {
+	            // Load person overview.
+	            FXMLLoader loader = new FXMLLoader();
+	            loader.setLocation(MainApp.class.getResource("view/RegistrationLayout.fxml"));
+	            AnchorPane registrationPage = (AnchorPane) loader.load();
+
+	            // Set person overview into the center of root layout.
+	            rootLayout.setCenter(registrationPage);
+
+
+	            // Give the controller access to the main app.
+	            RegistrationPageController controller = loader.getController();
+	            controller.setMainApp(this);
+
+	        } catch (IOException e) {
+	            e.printStackTrace();
+	        }
 	}
 
 	public static void main(String[] args) {
