@@ -8,6 +8,7 @@ import javafx.scene.Scene;
 import javafx.scene.layout.AnchorPane;
 import javafx.scene.layout.BorderPane;
 import javafx.stage.Stage;
+import pm.makery.view.RegistrationPageController;
 
 public class MainApp extends Application {
 
@@ -18,10 +19,17 @@ public class MainApp extends Application {
 		this.primaryStage = primaryStage;
         this.primaryStage.setTitle("PlanMinder");
 
-        initRootLayout();
+        this.primaryStage.setResizable(false);
 
-        showLoginPage();
+        initRootLayout();
+        showRegistrationPage();
+        //showLoginPage();
+
 	}
+
+
+
+
 
 	/**
 	 * Initializes the root layout.
@@ -32,6 +40,7 @@ public class MainApp extends Application {
             FXMLLoader loader = new FXMLLoader();
             loader.setLocation(MainApp.class.getResource("view/RootLayout.fxml"));
             rootLayout = (BorderPane) loader.load();
+            
 
             // Show the scene containing the root layout.
             Scene scene = new Scene(rootLayout);
@@ -60,6 +69,29 @@ public class MainApp extends Application {
 	            PersonOverviewController controller = loader.getController();
 	            controller.setMainApp(this);
 	            */
+	        } catch (IOException e) {
+	            e.printStackTrace();
+	        }
+	}
+	
+	/**
+	 * Shows the login page inside rootlayout.
+	 */
+	public void showRegistrationPage() {
+		 try {
+	            // Load person overview.
+	            FXMLLoader loader = new FXMLLoader();
+	            loader.setLocation(MainApp.class.getResource("view/RegistrationLayout.fxml"));
+	            AnchorPane registrationPage = (AnchorPane) loader.load();
+
+	            // Set person overview into the center of root layout.
+	            rootLayout.setCenter(registrationPage);
+
+	            
+	            // Give the controller access to the main app.
+	            RegistrationPageController controller = loader.getController();
+	            controller.setMainApp(this);
+	            
 	        } catch (IOException e) {
 	            e.printStackTrace();
 	        }
