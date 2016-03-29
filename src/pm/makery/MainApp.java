@@ -7,20 +7,17 @@ import javafx.fxml.FXMLLoader;
 import javafx.scene.Scene;
 import javafx.scene.layout.AnchorPane;
 import javafx.scene.layout.BorderPane;
-import javafx.stage.Modality;
 import javafx.stage.Stage;
-<<<<<<< HEAD
-import pm.makery.view.LoginPageController;
-import pm.makery.view.StartPageController;
-=======
-import pm.makery.view.RegistrationPageController;
->>>>>>> 057ac7261b74b05f35bea746f8deed2472f01432
+import pm.makery.controller.LoginPageController;
+import pm.makery.controller.RegistrationPageController;
+import pm.makery.controller.StartPageController;
 
 public class MainApp extends Application {
 
 	private Stage primaryStage;
 	private BorderPane rootLayout;
 	private BorderPane planeLayout;
+	private Scene rootScene, planeScene;
 	private String username = "";
 	private String password = "";
 
@@ -32,37 +29,32 @@ public class MainApp extends Application {
 		initRootLayout();
 		initPlaneLayout();
 
+		
 		showLoginPage();
 
-        this.primaryStage.setResizable(false);
+		this.primaryStage.setResizable(false);
 
 	}
 
 
-
-
-
 	/**
-	 * Initializes the root layout.
+	 * Initializes the root layout and the scene with the layout.
 	 */
 	public void initRootLayout() {
 		try {
 			// Load root layout from fxml file.
 			FXMLLoader loader = new FXMLLoader();
-			loader.setLocation(MainApp.class.getResource("view/RootLayout.fxml"));
-			rootLayout = (BorderPane) loader.load();
+			loader.setLocation(MainApp.class.getResource("view/PlaneLayout.fxml"));
+			rootLayout = loader.load();
+			rootScene = new Scene(rootLayout);
 
-			// Show the scene containing the root layout.
-			Scene scene = new Scene(rootLayout);
-			primaryStage.setScene(scene);
-			primaryStage.show();
 		} catch (IOException e) {
 			e.printStackTrace();
 		}
 	}
 
 	/**
-	 * Initializes the plane layout
+	 * Initializes the plane layout the scene with the layout.
 	 */
 	public void initPlaneLayout() {
 		try {
@@ -70,103 +62,113 @@ public class MainApp extends Application {
 			FXMLLoader loader = new FXMLLoader();
 			loader.setLocation(MainApp.class.getResource("view/PlaneLayout.fxml"));
 			planeLayout = (BorderPane) loader.load();
+			planeScene = new Scene(planeLayout);
+
 		} catch (IOException e) {
 			e.printStackTrace();
 		}
+
+
 	}
 
 	public Stage getPrimaryStage() {
 		return primaryStage;
-            // Load root layout from fxml file.
-            FXMLLoader loader = new FXMLLoader();
-            loader.setLocation(MainApp.class.getResource("view/RootLayout.fxml"));
-            rootLayout = (BorderPane) loader.load();
-
-
-            // Show the scene containing the root layout.
-            Scene scene = new Scene(rootLayout);
-            primaryStage.setScene(scene);
-            primaryStage.show();
-        } catch (IOException e) {
-            e.printStackTrace();
-        }
 	}
+
 
 	/**
 	 * Shows the login page inside rootlayout.
 	 */
 	public void showLoginPage() {
+
+
+
 		try {
 			// Load person overview.
 			FXMLLoader loader = new FXMLLoader();
 			loader.setLocation(MainApp.class.getResource("view/LoginPage.fxml"));
 			AnchorPane loginPage = (AnchorPane) loader.load();
 
+
+			if (rootLayout == null) System.out.println("HEje");
 			// Set person overview into the center of root layout.
 			rootLayout.setCenter(loginPage);
 
 			// Give the controller access to the main app.
-			LoginPageController controller = (LoginPageController) loader.getController();
+			LoginPageController controller = loader.getController();
 			controller.setMainApp(this);
 
 		} catch (IOException e) {
 			e.printStackTrace();
 		}
+		// Show the scene containing the root layout.
+		primaryStage.setScene(rootScene);
+		primaryStage.show();
 	}
+
+
 
 	/**
 	 * Shows startpage for the logged in user.
 	 * @param username is the name of the user.
 	 */
+
 	public boolean showStartPage(String username, String password) {
 		username = this.username;
 		password = this.password;
-		//testar så personen finns, just nu går allt igenom, vad man än skriver, JOAKIM fixes...
+		// TODO testar sï¿½ personen finns, just nu gï¿½r allt igenom, vad man ï¿½n skriver, JOAKIM fixes...
 		try {
 			FXMLLoader loader = new FXMLLoader();
 			loader.setLocation(MainApp.class.getResource("view/StartPage.fxml"));
-			BorderPane page = (BorderPane) loader.load();
+			BorderPane page = loader.load();
 
-			Scene scene = new Scene(planeLayout);
-			primaryStage.setScene(scene);
-			primaryStage.show();
 			planeLayout.setCenter(page);
 
 			// Give the controller access to the main app.
-			StartPageController controller = (StartPageController) loader.getController();
+			StartPageController controller = loader.getController();
 			controller.setMainApp(this);
 
-			return true;
 		} catch (IOException e) {
 			e.printStackTrace();
 			return false;
 		}
+		primaryStage.setScene(planeScene);
+		primaryStage.show();
+
+		return true;
 	}
 
 	/**
-	 * Shows the login page inside rootlayout.
+	 * Shows the registration page inside rootlayout since it 
+	 * was loaded in showLoginPage().
 	 */
 	public void showRegistrationPage() {
-		 try {
-	            // Load person overview.
-	            FXMLLoader loader = new FXMLLoader();
-	            loader.setLocation(MainApp.class.getResource("view/RegistrationLayout.fxml"));
-	            AnchorPane registrationPage = (AnchorPane) loader.load();
+		try {
+			// Load person overview.
+			FXMLLoader loader = new FXMLLoader();
+			loader.setLocation(MainApp.class.getResource("view/RegistrationLayout.fxml"));
+			AnchorPane registrationPage = loader.load();
 
-	            // Set person overview into the center of root layout.
-	            rootLayout.setCenter(registrationPage);
+			// Set person overview into the center of root layout.
+			rootLayout.setCenter(registrationPage);
 
 
-	            // Give the controller access to the main app.
-	            RegistrationPageController controller = loader.getController();
-	            controller.setMainApp(this);
+			// Give the controller access to the main app.
+			RegistrationPageController controller = loader.getController();
+			controller.setMainApp(this);
 
-	        } catch (IOException e) {
-	            e.printStackTrace();
-	        }
+		} catch (IOException e) {
+			e.printStackTrace();
+		}
 	}
 
 	public static void main(String[] args) {
 		launch(args);
+	}
+
+
+	public void closeApplication() {
+		System.out.println("test");
+		System.exit(0);		
 	}
 }

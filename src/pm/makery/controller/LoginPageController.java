@@ -1,4 +1,4 @@
-package pm.makery.view;
+package pm.makery.controller;
 
 import javafx.fxml.FXML;
 import javafx.scene.control.*;
@@ -46,7 +46,7 @@ public class LoginPageController {
     	String username = usernameInput.getText();
     	String password = passwordInput.getText();
 
-    	//ska spara inloggningsuppgifter om den är ikryssad.
+    	//ska spara inloggningsuppgifter om den ï¿½r ikryssad.
     	boolean rememberMeClicked = rememberMeCheckbox.isSelected();
 
     	boolean loginClicked = mainApp.showStartPage(username, password);
@@ -71,6 +71,19 @@ public class LoginPageController {
         alert.setHeaderText("Under construction.");
         alert.setContentText("At the moment you can not get your password. Thanks for being patient.");
         alert.showAndWait();
+    }
+    
+    /**
+     * Called when the user presses the register button.
+     */
+    public void handleRegister() {
+    	mainApp.showRegistrationPage();
+    }
+    @FXML
+    private void handleCloseApplication() {
+    	// TODO handle remember me option
+    	
+    	mainApp.closeApplication();
     }
 }
 

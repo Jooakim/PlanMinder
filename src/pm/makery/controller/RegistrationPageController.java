@@ -1,4 +1,4 @@
-package pm.makery.view;
+package pm.makery.controller;
 
 import java.sql.Connection;
 import java.sql.ResultSet;
@@ -118,17 +118,12 @@ public class RegistrationPageController {
 
 	@FXML
 	private void handleCancelRegistration() {
-		// TODO go back to main
+		mainApp.showLoginPage();
 	}
 
 	public void setMainApp(MainApp mainApp) {
 		this.mainApp = mainApp;
 	}
-	// Testcases for methods
-	/*public static void main(String[] args) {
-		RegistrationPageController r = new RegistrationPageController();
-		r.usernameAvailable("Joakim");
-	}*/
 
 
 }

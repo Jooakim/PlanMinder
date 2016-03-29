@@ -1,9 +1,10 @@
-package pm.makery.view;
+package pm.makery.controller;
 
 import javafx.fxml.FXML;
 import javafx.scene.control.*;
 import javafx.stage.Stage;
 import pm.makery.MainApp;
+import pm.makery.view.*;
 
 public class StartPageController {
 
@@ -48,7 +49,7 @@ public class StartPageController {
         this.mainApp = mainApp;
     }
 
-
+    
     /**
      * Called when the user presses log out from menu.
      */
