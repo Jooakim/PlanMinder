@@ -14,10 +14,10 @@
 <?import javafx.scene.layout.GridPane?>
 <?import javafx.scene.layout.HBox?>
 <?import javafx.scene.layout.RowConstraints?>
+<?import javafx.scene.layout.VBox?>
 <?import javafx.scene.text.Font?>
 
-
-<AnchorPane prefHeight="400.0" prefWidth="500.0" xmlns:fx="http://javafx.com/fxml/1" xmlns="http://javafx.com/javafx/8.0.65">
+<AnchorPane prefHeight="400.0" prefWidth="500.0" xmlns="http://javafx.com/javafx/8.0.65" xmlns:fx="http://javafx.com/fxml/1" fx:controller="pm.makery.view.LoginPageController">
    <children>
       <BorderPane layoutY="-8.0" prefHeight="200.0" prefWidth="200.0" AnchorPane.bottomAnchor="8.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="-8.0">
          <center>
@@ -46,12 +46,16 @@
                            <children>
                               <Label text="Username" />
                               <Label text="Password" GridPane.rowIndex="1" />
-                              <PasswordField GridPane.columnIndex="1" GridPane.rowIndex="1" />
-                              <TextField GridPane.columnIndex="1" />
+                              <PasswordField fx:id="passwordInput" GridPane.columnIndex="1" GridPane.rowIndex="1" />
+                              <TextField fx:id="usernameInput" GridPane.columnIndex="1" />
                            </children>
                         </GridPane>
-                        <Button layoutX="283.0" layoutY="113.0" mnemonicParsing="false" prefHeight="28.0" prefWidth="65.0" text="LOGIN" AnchorPane.topAnchor="110.0" />
-                        <CheckBox layoutX="156.0" layoutY="110.0" mnemonicParsing="false" text="Remember me" AnchorPane.topAnchor="115.0" />
+                        <Button layoutX="283.0" layoutY="113.0" mnemonicParsing="false" onAction="#handleLogin" prefHeight="28.0" prefWidth="65.0" text="LOGIN" AnchorPane.topAnchor="110.0" />
+                        <VBox layoutX="156.0" layoutY="116.0" prefHeight="15.0" prefWidth="100.0">
+                           <children>
+                              <CheckBox fx:id="rememberMeCheckbox" mnemonicParsing="false" text="Remember me" />
+                           </children>
+                        </VBox>
                      </children>
                   </AnchorPane>
               </items>
@@ -66,7 +70,7 @@
          <bottom>
             <HBox prefHeight="57.0" prefWidth="500.0" BorderPane.alignment="CENTER">
                <children>
-                  <Hyperlink text="Forgot your password?">
+                  <Hyperlink fx:id="forgotPassword" onAction="#handleForgotPassword" text="Forgot your password?">
                      <HBox.margin>
                         <Insets left="100.0" />
                      </HBox.margin>
