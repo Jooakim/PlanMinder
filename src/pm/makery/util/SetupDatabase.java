@@ -12,7 +12,7 @@ public class SetupDatabase {
 
     public SetupDatabase() {
 
-        con = Database.getConnection();
+        con = DatabaseUtil.getConnection();
 
         // Look if table tableName exists, if not create one
         try {

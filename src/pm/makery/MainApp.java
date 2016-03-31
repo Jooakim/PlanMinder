@@ -11,6 +11,7 @@ import javafx.stage.Stage;
 import pm.makery.controller.LoginPageController;
 import pm.makery.controller.RegistrationPageController;
 import pm.makery.controller.StartPageController;
+import pm.makery.model.Person;
 
 public class MainApp extends Application {
 
@@ -26,7 +27,7 @@ public class MainApp extends Application {
 		this.primaryStage = primaryStage;
 		this.primaryStage.setTitle("PlanMinder");
 
-		initRootLayout();
+		//initRootLayout();
 		initPlaneLayout();
 
 		
@@ -90,19 +91,21 @@ public class MainApp extends Application {
 			AnchorPane loginPage = (AnchorPane) loader.load();
 
 
-			if (rootLayout == null) System.out.println("HEje");
 			// Set person overview into the center of root layout.
-			rootLayout.setCenter(loginPage);
+			planeLayout.setCenter(loginPage);
 
 			// Give the controller access to the main app.
 			LoginPageController controller = loader.getController();
 			controller.setMainApp(this);
+			
+			// Fill username and password if remember me exists
+			controller.readRememberMe();
 
 		} catch (IOException e) {
 			e.printStackTrace();
 		}
 		// Show the scene containing the root layout.
-		primaryStage.setScene(rootScene);
+		primaryStage.setScene(planeScene);
 		primaryStage.show();
 	}
 
@@ -113,10 +116,9 @@ public class MainApp extends Application {
 	 * @param username is the name of the user.
 	 */
 
-	public boolean showStartPage(String username, String password) {
-		username = this.username;
-		password = this.password;
-		// TODO testar s� personen finns, just nu g�r allt igenom, vad man �n skriver, JOAKIM fixes...
+	public boolean showStartPage(Person user) {
+		this.username = user.getUsername();
+		
 		try {
 			FXMLLoader loader = new FXMLLoader();
 			loader.setLocation(MainApp.class.getResource("view/StartPage.fxml"));
@@ -150,7 +152,7 @@ public class MainApp extends Application {
 			AnchorPane registrationPage = loader.load();
 
 			// Set person overview into the center of root layout.
-			rootLayout.setCenter(registrationPage);
+			planeLayout.setCenter(registrationPage);
 
 
 			// Give the controller access to the main app.
@@ -168,7 +170,11 @@ public class MainApp extends Application {
 
 
 	public void closeApplication() {
-		System.out.println("test");
-		System.exit(0);		
+		try {
+			stop();
+			System.exit(0);
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
 	}
 }

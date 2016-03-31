@@ -7,11 +7,15 @@ import java.sql.Statement;
 
 
 import javafx.fxml.FXML;
+import javafx.scene.control.Alert;
+import javafx.scene.control.Alert.AlertType;
+import javafx.scene.control.ButtonType;
 import javafx.scene.control.Label;
 import javafx.scene.control.PasswordField;
 import javafx.scene.control.TextField;
+import javafx.scene.paint.Color;
 import pm.makery.MainApp;
-import pm.makery.util.Database;
+import pm.makery.util.DatabaseUtil;
 
 public class RegistrationPageController {
 
@@ -28,20 +32,18 @@ public class RegistrationPageController {
 	private PasswordField passwordField;
 	@FXML
 	private PasswordField confirmPasswordField;
+	
+	@FXML
+	private Label passwordMissmatch;
+	@FXML
+	private Label usernameTaken;
 
 
 
 	// Reference to main application
 	private MainApp mainApp;
 
-	// Database instance
 
-	private Connection con;
-
-
-	public RegistrationPageController() {
-		con = Database.getConnection();
-	}
 
 	public void initialize() {
 
@@ -49,72 +51,80 @@ public class RegistrationPageController {
 	// Check if username is taken, if it is in use return false
 	private boolean usernameAvailable(String username) {
 		String checkIfTaken = "SELECT * FROM Users WHERE Username='" + username + "';";
-		ResultSet rs = databaseQuery(checkIfTaken);
-		try {
-			if (rs.next()) {
-				return false;
-			}
-		} catch (SQLException e) {
-			e.printStackTrace();
-		} 
-		// Username is available
-		return true;
+		ResultSet rs = DatabaseUtil.databaseQuery(checkIfTaken);
+		
+		return DatabaseUtil.checkEmptyResultSet(rs);
+		
 	}
 
 	private void registerUser(String username, String password) {
 		String registerUser = "INSERT INTO Users VALUES ('" 
 				+ username + "','" + password +"');";
-		updateDatabase(registerUser);
-		// TODO Notify user of completion visually
-		System.out.println("User successfully created");
+		DatabaseUtil.updateDatabase(registerUser);
+
+		// Inform user of completion
+		Alert alert = new Alert(AlertType.INFORMATION);
+		alert.initOwner(mainApp.getPrimaryStage());
+		alert.setTitle("Registration Complete");
+		alert.setHeaderText("Registration Complete");
+		alert.setContentText("User successfully created");
+		
+		// Show alert and wait for user to click ok,
+		// sends user back to main if clicked.
+		alert.showAndWait()
+		.filter(response -> response == ButtonType.OK)
+		.ifPresent(response -> mainApp.showLoginPage());
 	}
 
-	// Handles select statements
-	private ResultSet databaseQuery(String query) {
-		ResultSet rs = null;
-		try  {
-			Statement st = con.createStatement();
-			rs = st.executeQuery(query);
-		} catch (SQLException e) {
-			e.printStackTrace();
-		}
-		return rs;
-	}
-
-	// Handles create and inserts statements
-	private void updateDatabase(String query) {
-		try  {
-			Statement st = con.createStatement();
-			st.executeUpdate(query);
-		} catch (SQLException e) {
-			e.printStackTrace();
-		}
-	}
+	
 	@FXML
 	private void handleRegisterUser() {
 		String username, password, confirmPassword;
+		
+		// Clear if set previously
+		passwordMissmatch.setText("");
+		usernameTaken.setText("");
+		
 
-		if (passwordField!=null) {
-			password = passwordField.getText();
-			System.out.println(password);
-			confirmPassword = confirmPasswordField.getText();
-			if (password.equals(confirmPassword)) {
-				username = usernameField.getText();
-				if (usernameAvailable(username)) {
-					registerUser(username, password);
-				} else {
-					// TODO alert the user that the username is taken with a alertbox
-					// or something visual rather than plain text in terminal.
-					System.out.println("Username already in use");
-				}
-
+		password = passwordField.getText();
+		if (!validInput(password)) {
+			passwordMissmatch.setText("Cannot be empty");
+			passwordMissmatch.setTextFill(Color.rgb(255, 0, 0));
+			return;
+		}
+		
+		confirmPassword = confirmPasswordField.getText();
+				
+		
+		// If password matches register new user if username is 
+		// available
+		if (password.equals(confirmPassword)) {
+			username = usernameField.getText();
+			if (!validInput(username)) {
+				usernameTaken.setText("Cannot be empty");
+				usernameTaken.setTextFill(Color.rgb(255, 0, 0));
+				return;
+			} 
+			
+			if (usernameAvailable(username)) {
+				registerUser(username, password);
 			} else {
-				// TODO Graphical alert
-				System.out.println("Missmatch between passwords");
+				usernameTaken.setText("Already in use");
+				usernameTaken.setTextFill(Color.rgb(255, 0, 0));
 			}
+
+		} else {
+			passwordMissmatch.setText("Missmatch");
+			passwordMissmatch.setTextFill(Color.rgb(255, 0, 0));
 		}
 
+
 	}
+	
+	private boolean validInput(String input) {
+		return input != null && input.length() > 0;
+	}
+
 
 	@FXML
 	private void handleCancelRegistration() {
