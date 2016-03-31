@@ -8,11 +8,14 @@ import pm.makery.MainApp;
 
 public class LoginPageController {
 
-	//Ska alla vara private egentligen..
-    public TextField usernameInput;
-    public PasswordField passwordInput;
-    public CheckBox rememberMeCheckbox;
-    public Hyperlink forgotPassword;
+	@FXML
+    private TextField usernameInput;
+	@FXML
+    private PasswordField passwordInput;
+	@FXML
+    private CheckBox rememberMeCheckbox;
+	@FXML
+    private Hyperlink forgotPassword;
 
     private MainApp mainApp;
 
@@ -27,8 +30,7 @@ public class LoginPageController {
      * Initializes the controller class. This method is automatically called
      * after the fxml file has been loaded.
      */
-    private void initialize() {
-    }
+    private void initialize() { }
 
     /**
      * Is called by the main application to give a reference back to itself.
@@ -42,7 +44,8 @@ public class LoginPageController {
      * Called when the user presses the login button.
      * TODO JOAKIM FIXES med databas och allt ;)
      */
-    public void handleLogin() {
+    @FXML
+    private void handleLogin() {
     	String username = usernameInput.getText();
     	String password = passwordInput.getText();
 
@@ -64,7 +67,8 @@ public class LoginPageController {
     /**
      * Called when the user presses the forgot password button.
      */
-    public void handleForgotPassword() {
+    @FXML
+    private void handleForgotPassword() {
     	Alert alert = new Alert(AlertType.WARNING);
         alert.initOwner(mainApp.getPrimaryStage());
         alert.setTitle("Under building");
@@ -72,17 +76,18 @@ public class LoginPageController {
         alert.setContentText("At the moment you can not get your password. Thanks for being patient.");
         alert.showAndWait();
     }
-    
+
     /**
      * Called when the user presses the register button.
      */
-    public void handleRegister() {
+    @FXML
+    private void handleRegister() {
     	mainApp.showRegistrationPage();
     }
     @FXML
     private void handleCloseApplication() {
     	// TODO handle remember me option
-    	
+
     	mainApp.closeApplication();
     }
 }

@@ -9,17 +9,28 @@ import pm.makery.view.*;
 public class StartPageController {
 
     private Stage startStage;
-    public Label settings;
-    public Label taskHandler;
-    public MenuItem newTaskMenu;
-    public MenuItem newAssignmentMenu;
-    public MenuItem taskHandlerMenu;
-    public MenuItem settingsMenu;
-    public MenuItem logOutMenu;
-    public Menu colorTheme;
-    public MenuItem casualTheme;
-    public MenuItem crazyTheme;
-    public MenuItem aboutMenu;
+    @FXML
+    private Label settings;
+    @FXML
+    private Label taskHandler;
+    @FXML
+    private MenuItem newTaskMenu;
+    @FXML
+    private MenuItem newAssignmentMenu;
+    @FXML
+    private MenuItem taskHandlerMenu;
+    @FXML
+    private MenuItem settingsMenu;
+    @FXML
+    private MenuItem logOutMenu;
+    @FXML
+    private Menu colorTheme;
+    @FXML
+    private MenuItem casualTheme;
+    @FXML
+    private MenuItem crazyTheme;
+    @FXML
+    private MenuItem aboutMenu;
 
     private MainApp mainApp;
 
@@ -28,15 +39,13 @@ public class StartPageController {
      * Is called before the initialize() method.
      */
     public StartPageController() {
-
     }
 
     /**
      * Initializes the controller class. This method is automatically called
      * after the fxml file has been loaded.
      */
-    private void initialize() {
-    }
+    private void initialize() { }
 
     public void setStartPage(Stage startStage) {
         this.startStage = startStage;
@@ -49,11 +58,12 @@ public class StartPageController {
         this.mainApp = mainApp;
     }
 
-    
+
     /**
      * Called when the user presses log out from menu.
      */
-    public void handleLogOut() {
+    @FXML
+    private void handleLogOut() {
     	//TODO remove person
     	Stage primaryStage = mainApp.getPrimaryStage();
     	mainApp.start(primaryStage);

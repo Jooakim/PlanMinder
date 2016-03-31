@@ -29,7 +29,7 @@ public class MainApp extends Application {
 		initRootLayout();
 		initPlaneLayout();
 
-		
+
 		showLoginPage();
 
 		this.primaryStage.setResizable(false);
@@ -80,9 +80,6 @@ public class MainApp extends Application {
 	 * Shows the login page inside rootlayout.
 	 */
 	public void showLoginPage() {
-
-
-
 		try {
 			// Load person overview.
 			FXMLLoader loader = new FXMLLoader();
@@ -139,7 +136,7 @@ public class MainApp extends Application {
 	}
 
 	/**
-	 * Shows the registration page inside rootlayout since it 
+	 * Shows the registration page inside rootlayout since it
 	 * was loaded in showLoginPage().
 	 */
 	public void showRegistrationPage() {
@@ -169,6 +166,6 @@ public class MainApp extends Application {
 
 	public void closeApplication() {
 		System.out.println("test");
-		System.exit(0);		
+		System.exit(0);
 	}
 }
