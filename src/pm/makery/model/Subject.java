@@ -25,6 +25,10 @@ public class Subject {
 		color = c;
 	}
 
+	public String getName() {
+		return subject;
+	}
+
 	public Color getColor() {
 		return color;
 	}
