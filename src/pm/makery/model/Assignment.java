@@ -99,69 +99,17 @@ public class Assignment {
 	public String getName() {
 		return assignment;
 	}
-
 /*
 	/**
-	 * Adds several recurring dates to an assignment according to a given interval.
+	 * TODO fix this....
 	 *
-	 * @param startDateTime the start date and time of the first assignment.
-	 * @param endDateTime the end date and time of first assignment.
-	 * @param finalDateTime the final date and time of the assignment.
-	 * @param interval the interval of the recurring assignment.
-	 * @param unit unit of the interval.
-	 * @throws  InvalidDateInputException if start date comes before end date or final date comes before end date.
-	 *
-	public void setRecurrent(LocalDateTime startDateTime, LocalDateTime endDateTime,
-			LocalDateTime finalDateTime, long interval, ChronoUnit unit)
-					throws InvalidDateInputException {
-
-		isLegalDateInput(startDateTime, endDateTime);
-		isLegalDateInput(endDateTime, finalDateTime);
-		while(startDateTime.isBefore(finalDateTime)) {
-			recurrentDates.put(startDateTime, endDateTime);
-			startDateTime = startDateTime.plus(interval, unit);
+	@Override
+	public int compareTo(Object o) {
+		if(o.getClass() == this.getClass()) {
+			Assignment a = (Assignment) o;
+			return a.getName().hashCode() - this.getName().hashCode();
 		}
-	}
-
-	/**
-	 * Add a new date and time to an assignment without removing the old ones.
-	 *
-	 * @param startDateTime
-	 * @param endDateTime
-	 * @throws InvalidDateInputException if start date comes before end date.
-	 *
-	public void addDate(LocalDateTime startDateTime, LocalDateTime endDateTime) throws InvalidDateInputException {
-		isLegalDateInput(startDateTime, endDateTime);
-		recurrentDates.put(startDateTime, endDateTime);
-	}
-
-	/**
-	 * Removes a given start date and end date from the assignment.
-	 *
-	 * @param startDateTime
-	 * @param endDateTime
-	 * @return true if the dates existed and remove correctly.
-	 *
-	public boolean removeDate(LocalDateTime startDateTime, LocalDateTime endDateTime) {
-		LocalDateTime tmp = recurrentDates.get(startDateTime);
-		if( tmp != null) {
-			return tmp.equals(endDateTime);
-		}
-		return false;
-	}
-
-	/**
-	 *
-	 * Makes sure two dates comes in the right order.
-	 *
-	 * @param startDateTime the date that you think should be first.
-	 * @param endDateTime the date that you think should be last.
-	 * @throws InvalidDateInputException if @param endDateTime comes before @param startDateTime.
-	 *
-	public void isLegalDateInput(LocalDateTime startDateTime, LocalDateTime endDateTime) throws InvalidDateInputException {
-		if (startDateTime.isBefore(endDateTime)) {
-			throw new InvalidDateInputException("Invalid date input exception. The date " + startDateTime.toString() + " comes before the date " + endDateTime.toString());
-		}
+		return 100 + o.hashCode();
 	}
 	*/
 }

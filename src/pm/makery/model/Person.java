@@ -8,7 +8,8 @@ public class Person {
 
 	private String username = "";
 	private String password = "";
-	private HashMap<Subject, ArrayList<Assignment>> subjectsAndAssignments = new HashMap<>();
+	private HashMap<Subject, ArrayList<Assignment>> subAndAssign = new HashMap<>();
+
 
 	public Person(String userName) {
 
@@ -18,7 +19,20 @@ public class Person {
 		return username;
 	}
 
-	public HashMap<Subject, ArrayList<Assignment>> getSubjectsAndAssignments() {
-		return subjectsAndAssignments;
+	public HashMap<Subject, ArrayList<Assignment>> getSubAndAssign() {
+		return subAndAssign;
 	}
+
+	public Set<Subject> getSubjects() {
+		return subAndAssign.keySet();
+	}
+
+	public ArrayList<Assignment> getAssignments(Subject subject) {
+		if(subAndAssign.containsKey(subject)) {
+			return subAndAssign.get(subject);
+		} else {
+			return new ArrayList<Assignment>();
+		}
+	}
+
 }

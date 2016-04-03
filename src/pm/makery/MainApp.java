@@ -8,6 +8,7 @@ import javafx.scene.Scene;
 import javafx.scene.layout.AnchorPane;
 import javafx.scene.layout.BorderPane;
 import javafx.stage.Stage;
+import pm.makery.controller.*;
 import pm.makery.controller.LoginPageController;
 import pm.makery.controller.RegistrationPageController;
 import pm.makery.controller.StartPageController;
@@ -19,7 +20,7 @@ public class MainApp extends Application {
 	private BorderPane rootLayout;
 	private BorderPane planeLayout;
 	private Scene rootScene, planeScene;
-
+	private Person user;
 
 	public void start(Stage primaryStage) {
 		this.primaryStage = primaryStage;
@@ -33,6 +34,14 @@ public class MainApp extends Application {
 
 		this.primaryStage.setResizable(false);
 
+	}
+
+	public void setUser(Person user) {
+		this.user = user;
+	}
+
+	public Person getUser() {
+		return user;
 	}
 
 
@@ -102,6 +111,51 @@ public class MainApp extends Application {
 		// Show the scene containing the root layout.
 		primaryStage.setScene(planeScene);
 		primaryStage.show();
+	}
+
+
+
+	public void showSettingPage() {
+		try {
+			// Load person overview.
+			FXMLLoader loader = new FXMLLoader();
+			loader.setLocation(MainApp.class.getResource("view/SettingsLayout.fxml"));
+			BorderPane settingPage = loader.load();
+
+
+			// Set person overview into the center of root layout.
+			planeLayout.setCenter(settingPage);
+
+			// Give the controller access to the main app.
+			SettingsController controller = loader.getController();
+			controller.setMainApp(this);
+
+
+		} catch (IOException e) {
+			e.printStackTrace();
+		}
+	}
+
+
+
+	public void showNewAssignment() {
+		try {
+			// Load person overview.
+			FXMLLoader loader = new FXMLLoader();
+			loader.setLocation(MainApp.class.getResource("view/NewAssignment.fxml"));
+			AnchorPane page = loader.load();
+
+			// Set person overview into the center of root layout.
+			planeLayout.setCenter(page);
+
+			// Give the controller access to the main app.
+			NewAssignmentController controller = loader.getController();
+			controller.setMainApp(this);
+			controller.initializeSubjects();
+
+		} catch (IOException e) {
+			e.printStackTrace();
+		}
 	}
 
 

@@ -9,27 +9,12 @@ public class StartPageController {
 
     private Stage startStage;
     @FXML
-    private Label settings;
+    private MenuItem newTaskMenu, newAssignmentMenu, taskHandlerMenu,
+    settingsMenu, logOutMenu, colorTheme, casualTheme, crazyTheme, aboutMenu;
     @FXML
-    private Label taskHandler;
+    private Label settings, taskHandler;
     @FXML
-    private MenuItem newTaskMenu;
-    @FXML
-    private MenuItem newAssignmentMenu;
-    @FXML
-    private MenuItem taskHandlerMenu;
-    @FXML
-    private MenuItem settingsMenu;
-    @FXML
-    private MenuItem logOutMenu;
-    @FXML
-    private Menu colorTheme;
-    @FXML
-    private MenuItem casualTheme;
-    @FXML
-    private MenuItem crazyTheme;
-    @FXML
-    private MenuItem aboutMenu;
+    private Button newSubjectButton, newAssignmentButton, settingsButton;
 
     private MainApp mainApp;
 
@@ -66,7 +51,16 @@ public class StartPageController {
     	//TODO remove person
     	Stage primaryStage = mainApp.getPrimaryStage();
     	mainApp.start(primaryStage);
+    }
 
+    @FXML
+    private void handleSettings() {
+    	mainApp.showSettingPage();
+    }
+
+    @FXML
+    private void handleNewAssignment(){
+    	mainApp.showNewAssignment();
     }
 
 }
