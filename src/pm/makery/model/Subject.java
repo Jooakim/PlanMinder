@@ -17,6 +17,11 @@ public class Subject {
 		this.subject = subject;
 	}
 
+	public Subject(String subject, Color c) {
+		this.subject = subject;
+		color = c;
+	}
+
 	public void setSubject(String subject) {
 		this.subject = subject;
 	}
@@ -33,4 +38,16 @@ public class Subject {
 		return color;
 	}
 
+/*
+	/**
+	 * TODO fix so it compares in alphabetic order..
+	 *
+	public int compareTo(Object o) {
+		if(o.getClass() == this.getClass()) {
+			Subject a = (Subject) o;
+			return a.getName().hashCode() - this.getName().hashCode();
+		}
+		return 100 + o.hashCode();
+	}
+*/
 }

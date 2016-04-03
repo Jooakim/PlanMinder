@@ -116,13 +116,18 @@ public class LoginPageController {
 		}
 	}
 
+	/**
+	 * TODO la till så user sparas i mainApp. Fel?
+	 */
 	private void tryUsernamePassword(String username, String password) {
 		String loginQuery = "SELECT * FROM " + DatabaseUtil.userTable
 				+ " WHERE Username='" + username
 				+ "' AND Password='" + password + "';";
 		ResultSet rs = DatabaseUtil.databaseQuery(loginQuery);
 		if (!DatabaseUtil.checkEmptyResultSet(rs)) {
-			mainApp.showStartPage(new Person(username));
+			Person user = new Person(username);
+			mainApp.showStartPage(user);
+			mainApp.setUser(user);
 		} else {
 			Alert alert = new Alert(AlertType.WARNING);
 			alert.initOwner(mainApp.getPrimaryStage());
