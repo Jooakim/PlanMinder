@@ -5,6 +5,8 @@ import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.sql.Statement;
 
+import com.mysql.jdbc.PreparedStatement;
+
 public class DatabaseUtil {
 
 	public static final String userTable = "Users";
@@ -58,4 +60,31 @@ public class DatabaseUtil {
 
 		return true;
 	}
+	
+	public static void registerUser(String username, String password) {
+		String registerUser = "INSERT INTO Users VALUES (? , ?);";
+		try {
+		PreparedStatement pstmt = (PreparedStatement) con.prepareStatement(registerUser);
+		pstmt.setString(1, username);
+		pstmt.setString(2, password);
+		pstmt.executeUpdate();
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
+		
+	}
+	
+	public static ResultSet loginUser(String username, String password) {
+		String login = "SELECT * FROM " + userTable + " WHERE Username = ? AND Password = ? ;";
+		try {
+		PreparedStatement pstmt = (PreparedStatement) con.prepareStatement(login);
+		pstmt.setString(1, username);
+		pstmt.setString(2, password);
+		return pstmt.executeQuery();
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
+		return null;
+	}
+	
 }

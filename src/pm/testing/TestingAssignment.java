@@ -7,9 +7,10 @@ import java.time.LocalDateTime;
 import java.time.LocalTime;
 
 /**
- * FULASTE PROGRAMMET JAG VET MEN HANN RADERA INNAN JAG FRÅGADE DIG VART JAG SKULLE LÄGGA DET
- * OCH JA CAPS LOCK ÄR KUL!
+ * FULASTE PROGRAMMET JAG VET MEN HANN RADERA INNAN JAG FRï¿½GADE DIG VART JAG SKULLE Lï¿½GGA DET
+ * OCH JA CAPS LOCK ï¿½R KUL!
  *
+ * VAD SNACKAR DU OM, DET Ã„R JU SKITFINT! JAG VET, "CAPS LOCK IS LOVE, CAPS LOCK IS LIFE"
  */
 public class TestingAssignment {
 
@@ -18,7 +19,7 @@ public class TestingAssignment {
 
 		Assignment a = new Assignment();
 		Assignment b = new Assignment("kvantfysik");
-		Assignment c = new Assignment("Fasta tillståndet");
+		Assignment c = new Assignment("Fasta tillstï¿½ndet");
 
 
 		System.out.println("Assignment: " + a.getName());

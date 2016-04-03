@@ -1,7 +1,8 @@
 package pm.makery.util;
 
-import java.time.LocalDateTime;
 
+
+@SuppressWarnings("serial")
 public class InvalidDateInputException extends Exception {
 
 	public InvalidDateInputException() {

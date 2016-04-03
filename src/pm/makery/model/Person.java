@@ -8,7 +8,7 @@ public class Person {
 
 	private String username = "";
 	private String password = "";
-	private HashMap<Subject, ArrayList<Assignment>> subjectsAndAssignments = new HashMap();
+	private HashMap<Subject, ArrayList<Assignment>> subjectsAndAssignments = new HashMap<>();
 
 	public Person(String userName) {
 

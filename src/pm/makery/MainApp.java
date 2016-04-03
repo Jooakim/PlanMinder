@@ -19,8 +19,6 @@ public class MainApp extends Application {
 	private BorderPane rootLayout;
 	private BorderPane planeLayout;
 	private Scene rootScene, planeScene;
-	private String username = "";
-	private String password = "";
 
 
 	public void start(Stage primaryStage) {
@@ -114,7 +112,6 @@ public class MainApp extends Application {
 	 */
 
 	public boolean showStartPage(Person user) {
-		this.username = user.getUsername();
 
 		try {
 			FXMLLoader loader = new FXMLLoader();

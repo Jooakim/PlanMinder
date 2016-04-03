@@ -1,9 +1,6 @@
 package pm.makery.controller;
 
-import java.sql.Connection;
 import java.sql.ResultSet;
-import java.sql.SQLException;
-import java.sql.Statement;
 
 
 import javafx.fxml.FXML;
@@ -58,9 +55,8 @@ public class RegistrationPageController {
 	}
 
 	private void registerUser(String username, String password) {
-		String registerUser = "INSERT INTO Users VALUES ('" 
-				+ username + "','" + password +"');";
-		DatabaseUtil.updateDatabase(registerUser);
+		
+		DatabaseUtil.registerUser(username, password);
 
 		// Inform user of completion
 		Alert alert = new Alert(AlertType.INFORMATION);

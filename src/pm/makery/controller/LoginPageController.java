@@ -117,10 +117,7 @@ public class LoginPageController {
 	}
 
 	private void tryUsernamePassword(String username, String password) {
-		String loginQuery = "SELECT * FROM " + DatabaseUtil.userTable
-				+ " WHERE Username='" + username
-				+ "' AND Password='" + password + "';";
-		ResultSet rs = DatabaseUtil.databaseQuery(loginQuery);
+		ResultSet rs = DatabaseUtil.loginUser(username, password);
 		if (!DatabaseUtil.checkEmptyResultSet(rs)) {
 			mainApp.showStartPage(new Person(username));
 		} else {
@@ -130,6 +127,7 @@ public class LoginPageController {
 			alert.setHeaderText("Wrong Username/Password");
 			alert.setContentText("Incorrect username or password. Please try again!");
 			alert.showAndWait();
+			passwordInput.setText("");
 		}
 
 	}
@@ -158,7 +156,6 @@ public class LoginPageController {
 	 * Called when the user presses the close button in the menu.
 	 */
 	private void handleCloseApplication() {
-		// TODO handle remember me option
 		mainApp.closeApplication();
 	}
 }
